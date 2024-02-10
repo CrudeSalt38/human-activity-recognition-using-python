@@ -1,0 +1,52 @@
+# Importing necessary libraries
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+import joblib
+
+# Load dataset (replace with your dataset loading code)
+def load_data():
+    # Your dataset loading code here
+    pass
+
+# Preprocess data (replace with your preprocessing code)
+def preprocess_data(X, y):
+    # Your preprocessing code here
+    pass
+
+# Train the model
+def train_model(X_train, y_train):
+    model = RandomForestClassifier(n_estimators=100)
+    model.fit(X_train, y_train)
+    return model
+
+# Evaluate the model
+def evaluate_model(model, X_test, y_test):
+    y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    return accuracy
+
+# Main function
+def main():
+    # Load dataset
+    X, y = load_data()
+
+    # Preprocess data
+    X_processed, y_processed = preprocess_data(X, y)
+
+    # Split data into train and test sets
+    X_train, X_test, y_train, y_test = train_test_split(X_processed, y_processed, test_size=0.2, random_state=42)
+
+    # Train the model
+    model = train_model(X_train, y_train)
+
+    # Evaluate the model
+    accuracy = evaluate_model(model, X_test, y_test)
+    print("Accuracy:", accuracy)
+
+    # Save the model
+    joblib.dump(model, 'activity_recognition_model.pkl')
+
+if __name__ == "__main__":
+    main()
